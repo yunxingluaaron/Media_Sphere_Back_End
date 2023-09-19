@@ -1,0 +1,23 @@
+############################################################
+#
+# Search Service
+# Port: 8006
+#
+############################################################
+server:
+  port: 8006
+  tomcat:
+    uri-encoding: UTF-8
+
+############################################################
+#
+# Project configuration
+#
+############################################################
+spring:
+  application:
+    name: service-search
+  data:
+    elasticsearch:
+      cluster-name: inews-elasticsearch
+      cluster-nodes: 192.168.137.100:9300

@@ -1,0 +1,17 @@
+server:
+  port: 8001
+
+spring:
+  redis:
+    database: 0
+    host: 192.168.137.100
+    port: 6379
+    password: zty1993redis
+
+# dev mybatis logs
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+website:
+  domain-name: inews.com

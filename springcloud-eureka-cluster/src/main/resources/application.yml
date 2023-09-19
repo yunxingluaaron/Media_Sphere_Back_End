@@ -1,0 +1,41 @@
+############################################################
+#
+# eureka cluster registration center
+# web port：7001 - 7003
+#
+############################################################
+server:
+  port: ${port:7001}
+  tomcat:
+    uri-encoding: UTF-8
+
+############################################################
+#
+# Project configuration
+#
+############################################################
+spring:
+  application:
+    name: springcloud-eureka-cluster
+############################################################
+#
+# eureka configuration
+#
+############################################################
+eureka:
+  instance:
+    # hostname in eureka cluster. All names should be unique
+    hostname: eureka-cluster-${port:7001}
+  other-node-port2: ${p2:7002}
+  other-node-port3: ${p3:7003}
+  client:
+    # Is eureka server register itself
+    register-with-eureka: false
+    fetch-registry: false
+    # Set multiple eureka url for cluster
+    # All other host in the cluster without this one
+    service-url:
+      defaultZone: http://eureka-cluster-${eureka.other-node-port2}:${eureka.other-node-port2}/eureka/,http://eureka-cluster-${eureka.other-node-port3}:${eureka.other-node-port3}/eureka/
+    server:
+      enable-self-preservation: true
+      eviction-interval-timer-in-ms: 5000   # Time for clearing invalid nodes，5s，default: 60s

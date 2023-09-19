@@ -1,0 +1,85 @@
+############################################################
+#
+# Zuul config
+#
+############################################################
+server:
+  port: 7070
+  tomcat:
+    uri-encoding: UTF-8
+
+############################################################
+#
+# Project configuration
+#
+############################################################
+spring:
+  application:
+    name: springcloud-zuul-server
+  redis:
+    database: 0
+    host: 192.168.137.100
+    port: 6379
+    password: zty1993redis
+  cloud:
+    config:
+      label: main
+      name: zuul
+      profile: prod
+#      uri: http://192.168.18.129:7080
+      discovery:
+        service-id: springcloud-config
+        enabled: true
+  rabbitmq:
+    host: 192.168.137.103
+    port: 5672
+    username: ztyadmin
+    password: UQZDAt3APUAg
+    virtual-host: inews-dev
+  zipkin:
+    # Zipkin will send traces to following address
+    base-url: http://192.168.18.129:9411/
+    sender:
+      # Data type for sending collected traces
+      # web: http format
+      type: web
+  sleuth:
+    sampler:
+      probability: 1        #Precentage of data sampling, in range [0 - 1].
+############################################################
+#
+# eureka client configuration
+#
+############################################################
+eureka:
+  # Customized eureka server info
+  server:
+    hostname: eureka
+    port: 7000
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://${eureka.server.hostname}:${eureka.server.port}/eureka/
+      defaultZone:  http://eureka-cluster-7001:7001/eureka/,http://eureka-cluster-7002:7002/eureka/,http://eureka-cluster-7003:7003/eureka/
+
+############################################################
+#
+# zuul configuration
+#
+############################################################
+# Routing config: http://[gateway address]:[port]/[prefix]/[service id]/[request path]
+zuul:
+  routes:
+    service-article: /service-article/** # -> Simplify the following config
+#     service-article:                # Router id，Service id
+#        path: /service-article/**     # Request path(prefix)，match with：localhost:6000/article-service/abc
+#        service-id: service-article # service id that will be forwarded by zuul
+#        url: http://192.168.0.166:8001   # forward request from above path to this ip address
+  prefix: /api  # prefix
+
+# ip filtering configuration
+blackIp:
+  continueCounts: ${counts:10}    # ip connection request time
+  timeInterval: ${interval:10}    # ip time interval. second
+  limitTimes: ${times:15}         # block time. second

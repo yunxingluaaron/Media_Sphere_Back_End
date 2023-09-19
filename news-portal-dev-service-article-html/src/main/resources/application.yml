@@ -1,0 +1,45 @@
+############################################################
+#
+# Static microservice of articles
+# web port  Set as：8002
+#
+############################################################
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+
+############################################################
+#
+# 配置项目信息
+#
+############################################################
+spring:
+  profiles:
+    active: dev  #yml配置文件的环境配置，dev：开发环境，test：测试环境，prod：生产环境
+  application:
+    name: service-article-html
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  data:
+    mongodb:
+      uri: mongodb://root:lmqFYJk>5H26@LocalHost:27017
+      database: news-portal
+  freemarker:
+    charset: UTF-8
+    content-type: text/html
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+  rabbitmq:
+    host: 192.168.137.103
+    port: 5672
+    username: ztyadmin
+    password: UQZDAt3APUAg
+    virtual-host: inews-dev
+
+# Set the path of freemarker generated static html
+freemarker:
+  html:
+    target: C:\Users\ztyam\OneDrive - University of Florida\1_Projects\news-portal\news-portal-dev\workspace\freemarker_html
+    article: C:\Users\ztyam\Documents\Tools\apache-tomcat-10.0.2\webapps\news-portal\portal\a

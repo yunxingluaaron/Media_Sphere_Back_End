@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.article.mapper.ArticleMapperCustom">
+    <update id="updateAppointToPublish">
+        UPDATE
+            article
+        SET
+            is_appoint = 0
+        WHERE
+            publish_time &lt;= NOW()
+          and
+            is_appoint = 1
+    </update>
+</mapper>
+<!--For huge data, it consume resource for processing all the data in short time-->
+<!--The time accuracy is not good enought for this method-->

@@ -1,0 +1,60 @@
+############################################################
+#
+# File Micro Service
+# web port  set：8004
+#
+############################################################
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+
+############################################################
+#
+# 配置项目信息
+#
+############################################################
+spring:
+  profiles:
+    active: dev  #yml配置文件的环境配置，dev：开发环境，test：测试环境，prod：生产环境
+  application:
+    name: service-files
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 512000   # 请求的文件大小限制为500kb
+      max-request-size: 512000
+  data:
+    mongodb:
+      uri: mongodb://root:lmqFYJk>5H26@LocalHost:27017
+      database: news-portal
+
+############################################################
+#
+# fdfs setting
+#
+############################################################
+fdfs:
+  connect-timeout: 30   # 连接的超时时间
+  so-timeout: 30        # 读取的超时时间
+  # TODO 修改生成环境的
+  tracker-list: 192.168.137.101:22122   # tracker服务所在的ip地址和端口号
+
+############################################################
+#
+# eureka client configuration
+#
+############################################################
+eureka:
+  # Customized eureka server info
+  server:
+    hostname: eureka
+    port: 7000
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://${eureka.server.hostname}:${eureka.server.port}/eureka/
+      defaultZone:  http://eureka-cluster-7001:7001/eureka/,http://eureka-cluster-7002:7002/eureka/,http://eureka-cluster-7003:7003/eureka/

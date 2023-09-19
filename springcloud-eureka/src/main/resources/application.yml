@@ -1,0 +1,39 @@
+############################################################
+#
+# eureka registration center
+# web port：7000
+#
+############################################################
+server:
+  port: 7000
+  tomcat:
+    uri-encoding: UTF-8
+
+############################################################
+#
+# Project configuration
+#
+############################################################
+spring:
+  application:
+    name: springcloud-eureka
+############################################################
+#
+# eureka configuration
+#
+############################################################
+eureka:
+  instance:
+    # eureka hostname: "hostname", or any name
+    hostname: eureka
+  client:
+    # Is eureka server register itself
+    register-with-eureka: false
+    # 从注册中心获得检索服务实例，server没有必要，直接false即可
+    fetch-registry: false
+    # 单实例配置自己的服务地址，高可用集群则配置多个地址
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000   # Time for clearing invalid nodes，min: 5s，default: 60s

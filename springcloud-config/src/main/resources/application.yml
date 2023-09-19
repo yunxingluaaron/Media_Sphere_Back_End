@@ -1,0 +1,55 @@
+############################################################
+#
+# config center gateway
+# web port：7080
+#
+############################################################
+server:
+  port: 7080
+  tomcat:
+    uri-encoding: UTF-8
+
+############################################################
+#
+# Project configuration
+#
+############################################################
+spring:
+  application:
+    name: springcloud-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: git://github.com/LIMONIC/News-portal-config.git
+          default-label: main
+  rabbitmq:
+    host: 192.168.137.103
+    port: 5672
+    username: ztyadmin
+    password: UQZDAt3APUAg
+    virtual-host: inews-dev
+
+############################################################
+#
+# eureka client configuration
+#
+############################################################
+eureka:
+  # Customized eureka server info
+  server:
+    hostname: eureka
+    port: 7000
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://${eureka.server.hostname}:${eureka.server.port}/eureka/
+      defaultZone:  http://eureka-cluster-7001:7001/eureka/,http://eureka-cluster-7002:7002/eureka/,http://eureka-cluster-7003:7003/eureka/
+
+# Dynamically refresh configuration from git
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

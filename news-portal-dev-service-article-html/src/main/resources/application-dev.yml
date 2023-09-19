@@ -1,0 +1,12 @@
+server:
+  port: 8002
+
+spring:
+  redis:
+    database: 0
+    host: 192.168.137.100
+    port: 6379
+    password: zty1993redis
+
+website:
+  domain-name: inews.com

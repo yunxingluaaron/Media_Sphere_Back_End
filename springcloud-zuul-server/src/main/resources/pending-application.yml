@@ -1,0 +1,85 @@
+############################################################
+#
+# zuul gateway
+# web port：7070
+#
+############################################################
+server:
+  port: 7070
+  tomcat:
+    uri-encoding: UTF-8
+
+############################################################
+#
+# Project configuration
+#
+############################################################
+spring:
+  application:
+    name: springcloud-zuul-server
+  redis:
+    database: 0
+    host: 192.168.137.100
+    port: 6379
+    password: zty1993redis
+
+############################################################
+#
+# eureka client configuration
+#
+############################################################
+eureka:
+  # Customized eureka server info
+  server:
+    hostname: eureka
+    port: 7000
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://${eureka.server.hostname}:${eureka.server.port}/eureka/
+      defaultZone:  http://eureka-cluster-7001:7001/eureka/,http://eureka-cluster-7002:7002/eureka/,http://eureka-cluster-7003:7003/eureka/
+
+#hystrix:
+#  command:
+#    myusers-service:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 60000
+#
+#myusers-service:
+#  ribbon:
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+##    listOfServers: http://example1.com,http://example2.com
+#    ConnectTimeout: 10000
+#    ReadTimeout: 10000
+#    MaxTotalHttpConnections: 5000
+#    MaxConnectionsPerHost: 1000
+
+############################################################
+#
+# zuul configuration
+#
+############################################################
+# Routing config: http://[gateway address]:[port]/[prefix]/[service id]/[request path]
+zuul:
+  routes:
+    service-article: /service-article/** # -> Simplify the following config
+#     service-article:                # Router id，Service id
+#        path: /service-article/**     # Request path(prefix)，match with：localhost:6000/article-service/abc
+#        service-id: service-article # service id that will be forwarded by zuul
+#        url: http://192.168.0.166:8001   # forward request from above path to this ip address
+  prefix: /api  # prefix
+
+#  host:
+#    max-total-connections: 10000
+#    max-per-route-connections: 60000
+#  semaphore:
+#    max-semaphores: 200
+
+# ip filtering configuration
+blackIp:
+  continueCounts: ${counts:10}    # ip connection request time
+  timeInterval: ${interval:10}    # ip time interval. second
+  limitTimes: ${times:15}         # block time. second
