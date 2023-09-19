@@ -1,5 +1,5 @@
-# News-portal-backend
-Welcome to the New Portal project! 
+# Media-Sphere-backend
+Welcome to the Media Sphere project! 
 
 Looking for the front-end part of this project? Please check here 👉 https://github.com/LIMONIC/News-portal-frontend
 
