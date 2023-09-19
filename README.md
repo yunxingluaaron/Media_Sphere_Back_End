@@ -5,6 +5,3 @@ Looking for the front-end part of this project? Please check here 👉 https://g
 
 I'm currently working on packaging all the code into a container and getting it online!
 
-Here is the main architecture：👇
-
-![Project-Architecture-Diagram]
