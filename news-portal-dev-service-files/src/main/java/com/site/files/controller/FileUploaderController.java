@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Decoder;
+import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -153,7 +153,8 @@ public class FileUploaderController implements FileUploaderControllerApi {
         String file64 = newAdminBO.getImg64();
 
         // Convert bse64 string to byte array
-        byte[] bytes = new BASE64Decoder().decodeBuffer(file64.trim());
+        byte[] bytes = Base64.getDecoder().decode(file64.trim());
+
 
         // Convert to input stream
         ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);

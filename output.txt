@@ -1,0 +1,26 @@
+C:\Users\pitt\Desktop\Job_Application_Github\Project_1\News_Portal_Front_Back_Config\News-portal-backend
+├── C
+├── maven
+├── mybatis-generator-database
+├── news-portal-config
+├── news-portal-dev-article
+├── news-portal-dev-common
+├── news-portal-dev-model
+├── news-portal-dev-service-admin
+├── news-portal-dev-service-api
+├── news-portal-dev-service-article
+├── news-portal-dev-service-article-html
+├── news-portal-dev-service-files
+├── news-portal-dev-service-search
+├── news-portal-dev-service-user
+├── news-portal-dev.iml
+├── pom.xml
+├── README.md
+├── resources
+├── springcloud-config
+├── springcloud-eureka
+├── springcloud-eureka-cluster
+└── springcloud-zuul-server
+
+directory: 18 file: 4
+
